@@ -80,14 +80,6 @@ Shortcut script:
 ./scripts/start_prod.sh
 ```
 
-### Option C: macOS launchd (auto-start on login/reboot)
-Use template: `deploy/com.elliottluftman.phishguard.plist`
-
-```bash
-cp deploy/com.elliottluftman.phishguard.plist ~/Library/LaunchAgents/
-launchctl load ~/Library/LaunchAgents/com.elliottluftman.phishguard.plist
-launchctl start com.elliottluftman.phishguard
-```
 
 ## Environment Variables
 
