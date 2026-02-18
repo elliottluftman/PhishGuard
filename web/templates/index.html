@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PhishGuard | Threat Intelligence Console</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+</head>
+<body>
+    <div class="ambient-grid" aria-hidden="true"></div>
+    <div class="ambient-glow" aria-hidden="true"></div>
+
+    <main class="layout">
+        <header class="masthead">
+            <div>
+                <p class="eyebrow">PHISHGUARD SECURITY SUITE</p>
+                <h1>🛡 Threat Intelligence Console</h1>
+                <p class="subtitle">Hybrid phishing detection with heuristic signals and machine-learning risk scoring.</p>
+            </div>
+            <div class="service-chips">
+                <span class="chip">v1.1</span>
+                <a class="chip chip-link" href="/healthz" target="_blank" rel="noopener">healthz</a>
+                <a class="chip chip-link" href="/readyz" target="_blank" rel="noopener">readyz</a>
+            </div>
+        </header>
+
+        <section class="workspace">
+            <article class="panel intake-panel">
+                <div class="panel-head">
+                    <h2>Threat Intake</h2>
+                    <p>Choose source type, paste content, and run a live analysis.</p>
+                </div>
+
+                <div class="mode-switch" role="tablist" aria-label="Analysis mode">
+                    <button class="mode-pill active" data-mode="url" role="tab" aria-selected="true">URL</button>
+                    <button class="mode-pill" data-mode="email" role="tab" aria-selected="false">EMAIL</button>
+                </div>
+
+                <div id="url-editor" class="editor">
+                    <label for="url-input">URL Payload</label>
+                    <input id="url-input" type="text" placeholder="https://domain.tld/path" autocomplete="off" />
+                </div>
+
+                <div id="email-editor" class="editor hidden">
+                    <label for="email-input">Raw Email Payload</label>
+                    <textarea id="email-input" rows="12" placeholder="Paste headers + body text"></textarea>
+                </div>
+
+                <div class="action-row">
+                    <button id="analyze-btn" class="analyze-btn" type="button">Run Deep Scan</button>
+                    <div id="loading" class="loading hidden" aria-live="polite">
+                        <span class="spinner"></span>
+                        <span>Evaluating indicators...</span>
+                    </div>
+                </div>
+
+                <div class="sample-grid">
+                    <button class="sample-tile phishing" type="button" data-sample="phishing_email">
+                        <span>Sample: Phishing Email</span>
+                        <small>spoofed sender + urgency language</small>
+                    </button>
+                    <button class="sample-tile safe" type="button" data-sample="legitimate_email">
+                        <span>Sample: Legitimate Email</span>
+                        <small>shipping update from known domain</small>
+                    </button>
+                    <button class="sample-tile phishing" type="button" data-sample="phishing_url">
+                        <span>Sample: Phishing URL</span>
+                        <small>lookalike domain + credential path</small>
+                    </button>
+                    <button class="sample-tile safe" type="button" data-sample="safe_url">
+                        <span>Sample: Safe URL</span>
+                        <small>standard ecommerce destination</small>
+                    </button>
+                </div>
+
+                <div class="ops-note">
+                    <strong>Always-on mode:</strong>
+                    Use `docker compose up -d` or `launchd` for continuous uptime.
+                </div>
+            </article>
+
+            <article class="panel command-panel">
+                <div class="panel-head">
+                    <h2>Threat Verdict</h2>
+                    <p id="analysis-meta">Awaiting first scan.</p>
+                </div>
+
+                <div class="dial-wrap">
+                    <svg viewBox="0 0 220 220" class="dial" aria-hidden="true">
+                        <circle class="dial-track" cx="110" cy="110" r="84"></circle>
+                        <circle id="dial-progress" class="dial-progress" cx="110" cy="110" r="84"></circle>
+                    </svg>
+                    <div class="dial-center">
+                        <span id="score-value">0</span>
+                        <small>risk index</small>
+                    </div>
+                </div>
+
+                <div class="verdict-row">
+                    <div id="verdict-badge" class="verdict safe">SAFE</div>
+                    <div class="confidence-card">
+                        <p id="ml-confidence">ML confidence: --</p>
+                    </div>
+                </div>
+
+                <div class="score-stack">
+                    <div class="score-line">
+                        <div class="score-line-head">
+                            <span>Heuristic Engine</span>
+                            <strong id="heuristic-score-text">0/100</strong>
+                        </div>
+                        <div class="bar-shell"><div id="heuristic-bar" class="bar-fill"></div></div>
+                    </div>
+                    <div class="score-line">
+                        <div class="score-line-head">
+                            <span>ML Engine</span>
+                            <strong id="ml-score-text">0/100</strong>
+                        </div>
+                        <div class="bar-shell"><div id="ml-bar" class="bar-fill"></div></div>
+                    </div>
+                </div>
+            </article>
+        </section>
+
+        <section id="results-section" class="panel intelligence hidden" aria-live="polite">
+            <div class="intelligence-head">
+                <h2>Signal Feed</h2>
+                <p id="checks-summary">Heuristic checks will appear here after analysis.</p>
+            </div>
+            <div class="feed-columns">
+                <ul id="checks-list" class="feed-list"></ul>
+
+                <aside class="ml-card">
+                    <h3>Model Intel</h3>
+                    <p id="ml-prediction">Prediction: --</p>
+                    <p id="ml-note">Model: --</p>
+                    <p id="weight-note" class="muted">Final score = 40% heuristic + 60% ML confidence.</p>
+                </aside>
+            </div>
+        </section>
+
+        <footer class="footer">
+            <p>PhishGuard v1.1 | Built by Elliott Luftman</p>
+            <p>For educational use only. Confirm suspicious messages through official channels.</p>
+        </footer>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}" defer></script>
+</body>
+</html>

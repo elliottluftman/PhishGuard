@@ -1,0 +1,23 @@
+services:
+  phishguard:
+    build: .
+    container_name: phishguard
+    restart: unless-stopped
+    ports:
+      - "5001:5001"
+    env_file:
+      - .env
+    environment:
+      PHISHGUARD_HOST: 0.0.0.0
+      PHISHGUARD_PORT: 5001
+      PHISHGUARD_DEBUG: "false"
+      PHISHGUARD_USE_WAITRESS: "false"
+      PHISHGUARD_LOG_LEVEL: INFO
+      PHISHGUARD_RATE_LIMIT_REQUESTS: 240
+      PHISHGUARD_RATE_LIMIT_WINDOW_SECONDS: 60
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:5001/healthz', timeout=3).read()"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 20s

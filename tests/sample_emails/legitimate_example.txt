@@ -1,0 +1,21 @@
+From: "Amazon.com" <shipment-tracking@amazon.com>
+To: user@example.com
+Subject: Your Amazon order #112-4567890-1234567 has shipped!
+Date: Tue, 16 Jan 2024 14:22:00 -0500
+DKIM-Signature: v=1; a=rsa-sha256; d=amazon.com; s=2024;
+
+Hi Sarah,
+
+Great news — your order has shipped!
+
+Order #112-4567890-1234567
+Estimated delivery: Thursday, January 18
+
+Items in this shipment:
+- Wireless Bluetooth Headphones (Qty: 1)
+
+You can track your package in the Amazon app or by visiting your order history in your account.
+
+Thanks for shopping with us!
+
+Amazon.com

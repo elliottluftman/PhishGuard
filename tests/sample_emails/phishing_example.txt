@@ -1,0 +1,21 @@
+From: "Apple Support" <support@app1e-id-verify.com>
+Reply-To: verification@suspicious-domain.xyz
+To: user@example.com
+Subject: [URGENT] Your Apple ID Has Been Compromised
+Date: Mon, 15 Jan 2024 08:30:00 -0500
+X-Mailer: PHP/5.3.0
+
+Dear Customer,
+
+We have detected unauthorized access to your Apple ID account. Your account has been temporarily limited due to suspicious activity.
+
+You must verify your identity within 24 hours or your account will be permanently disabled. Click the link below immediately to restore access:
+
+http://app1e-secure-verify.com/login?id=user@example.com&token=abc123
+
+If you do not verify your account, all purchases, subscriptions, and iCloud data will be lost.
+
+Thank you for your immediate attention to this matter.
+
+Apple Support Team
+This is an automated message — do not reply directly.
