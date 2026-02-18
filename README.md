@@ -1,8 +1,6 @@
-# 🛡️ PhishGuard — AI-Powered Phishing Email & URL Detector
+#  PhishGuard — AI-Powered Phishing Email & URL Detector
 
 > A dual-engine phishing detection platform combining rule-based security heuristics with machine learning to identify malicious emails and URLs.
-
-![PhishGuard Screenshot](screenshots/analysis.png)
 
 ## How It Works
 
